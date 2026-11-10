@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+{{meta}}
+<title>{{title}}</title>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bitter:wght@600;700;800&family=Open+Sans:wght@400;600;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<style>
+{{styles}}
+</style>
+</head>
+<body>
+<!-- Built from content/story.md, content/sites.csv, and config.yml. Edit those files, not this one. -->
+
+<div class="topbar"><div class="wrap">{{logo}}{{partner}}</div></div>
+{{notice}}
+
+<header class="{{heroClass}}">
+  {{hero}}
+  <div class="wrap">
+    <div class="hero-card">
+      <p class="eyebrow">{{eyebrow}}</p>
+      <h1>{{h1}}</h1>
+      {{dek}}
+      {{heroCredit}}
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <div class="intro">
+    <div class="intro-text">{{intro}}</div>
+    {{howto}}
+  </div>
+</div>
+
+{{filters}}
+
+<div class="wrap">
+  <div class="story">
+    <div class="steps" id="steps"></div>
+    <div class="mapcol">
+      <div class="mapbox">
+        <svg id="map" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Map. Drag to pan, use the plus and minus buttons to zoom."></svg>
+        <div class="zoomctl">
+          <button class="btn" id="zin" type="button" aria-label="Zoom in">+</button>
+          <button class="btn" id="zout" type="button" aria-label="Zoom out">−</button>
+          <button class="btn" id="zfull" type="button" aria-label="Show the full map" title="Full map" style="font-size:15px">⤢</button>
+        </div>
+        <div class="nowshowing" id="nowshowing" hidden><span></span></div>
+      </div>
+      <div class="legend" id="legend"></div>
+      {{mapNote}}
+    </div>
+  </div>
+</div>
+
+{{notes}}
+
+<footer><div class="wrap"><p>Photo credits appear with each entry.</p><p>{{footer}}</p></div></footer>
+
+<script id="storymap-data" type="application/json">{{data}}</script>
+<script>
+{{app}}
+</script>
+</body>
+</html>

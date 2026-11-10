@@ -1,0 +1,4 @@
+id,name,lat,lon,state,category,photo,photo_caption,photo_credit,photo_credit_url,photo_license,photo_license_url
+chaco,Chaco Canyon,36.0285,-107.9101,New Mexico,Oil and gas; Mining,chaco.jpg,"Chetro Ketl great kiva, Chaco Culture National Historical Park",National Park Service,https://commons.wikimedia.org/wiki/File:Chaco_Canyon_Chetro_Ketl_great_kiva_plaza_NPS.jpg,,
+bears-ears,Bears Ears National Monument,37.6253,-109.8695,Utah,Mining; Oil and gas,bears-ears.jpg,"Indian Creek, Bears Ears National Monument, Utah","Bob Wick, Bureau of Land Management",https://www.flickr.com/photos/mypubliclands/31828932931,CC BY 2.0,https://creativecommons.org/licenses/by/2.0/
+arctic-refuge,Arctic National Wildlife Refuge,69.85,-145.0,Alaska,Oil and gas,arctic-refuge.jpg,"Coastal plain and Brooks Range, Arctic National Wildlife Refuge",U.S. Fish and Wildlife Service,https://commons.wikimedia.org/wiki/File:Aerial_view_of_coastal_plain_and_Brooks_Range._(51358091763).jpg,,

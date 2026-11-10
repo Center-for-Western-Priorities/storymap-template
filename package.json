@@ -1,0 +1,19 @@
+{
+  "name": "cwp-storymap",
+  "version": "1.0.0",
+  "private": true,
+  "description": "CWP storymap template: builds an interactive scrolling map from Markdown and CSV",
+  "type": "module",
+  "scripts": {
+    "build": "node src/build.mjs",
+    "preview": "node src/build.mjs && npx --yes serve _site"
+  },
+  "dependencies": {
+    "csv-parse": "^7.0.3",
+    "d3-geo": "^3.1.2",
+    "js-yaml": "^5.5.0",
+    "marked": "^18.2.0",
+    "topojson-client": "^3.1.0",
+    "us-atlas": "^3.0.1"
+  }
+}

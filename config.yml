@@ -1,0 +1,107 @@
+# Storymap settings. Reader-facing text lives in content/story.md, and the
+# list of map points lives in content/sites.csv. This file controls how the
+# page looks and behaves.
+#
+# Lines starting with # are notes and are ignored. Keep the spacing at the
+# start of each line exactly as shown: it tells the build which setting
+# belongs to which section.
+
+# Short name for the browser tab. Leave blank to use the story title.
+page_title: "Storymap template"
+
+# Full web address where the map will be published, ending in a slash.
+# Used for link previews on social media and in Slack. Fill this in once
+# GitHub Pages is turned on (Settings > Pages shows the address).
+site_url: ""
+
+# Small label above the title.
+eyebrow: "Interactive map"
+
+# Optional co-brand partner logo shown beside the CWP logo.
+# Put the logo file in the assets folder and give its path here.
+# SVG files look sharpest. Leave logo blank for a CWP-only page.
+partner:
+  name: ""
+  logo: ""
+  url: ""
+
+# Large photo at the top of the page. Leave image blank for no photo.
+# The credit line accepts Markdown links, like [BLM](https://www.blm.gov).
+hero:
+  image: "images/hero.jpg"
+  alt: "Cedar Mesa overlooking Valley of the Gods, Utah"
+  credit: "Photo: Cedar Mesa overlooking Valley of the Gods, Utah. Bureau of Land Management"
+
+map:
+  # What the map shows when zoomed all the way out:
+  #   us      The 50 states, with Alaska and Hawaii in insets (default)
+  #   states  One or more states, named in the "states" list below
+  #   box     A rectangle set by the "box" setting below
+  #   custom  Your own map shapes from a GeoJSON file (see README)
+  extent: us
+
+  # Used when extent is "states". Full state names.
+  states: []
+  # Example:
+  # states: [Colorado, Utah]
+
+  # Used when extent is "box": [west longitude, south latitude, east longitude, north latitude]
+  box: []
+  # Example for the Four Corners:
+  # box: [-112.5, 34.5, -105.5, 39.5]
+
+  # Used when extent is "custom": path to a GeoJSON file of shapes to draw.
+  # Each shape should have a "name" property. The map fits to these shapes
+  # unless you also set "box".
+  basemap: ""
+
+  # How far the map zooms in on each point as readers scroll, as a share of
+  # the full map's width. Smaller numbers zoom in closer.
+  point_zoom: 0.24
+
+  # Show numbers inside the map points.
+  numbered: true
+
+  # Small note under the map. Leave blank for none.
+  note: "Points mark approximate locations."
+
+# Point colors. Name a column from sites.csv, then give a color for each
+# value in that column. When a place has several values separated by
+# semicolons, the first one sets its color. Leave color_by blank to make
+# every point the default color.
+points:
+  color_by: "category"
+  legend_title: "Category"
+  default_color: "#d2781e"
+  colors:
+    "Oil and gas": "#c96d17"
+    "Mining": "#96782d"
+    "Roads and pipelines": "#3d8aa8"
+    "Logging": "#5e9a2a"
+
+# Filters above the map. Each one is built from a column in sites.csv.
+# style can be "dropdown" (one choice from a list) or "buttons" (readers
+# can turn several on at once). Delete everything under "filters:" and
+# write "filters: []" for no filters.
+filters:
+  - column: "state"
+    label: "State"
+    style: "dropdown"
+  - column: "category"
+    label: "Category"
+    style: "buttons"
+
+# Small labels shown under each place's name. List sites.csv columns.
+tags: ["state", "category"]
+
+# Words used in the page's buttons and messages.
+labels:
+  singular: "place"
+  plural: "places"
+  how_to: "**Scroll** to move through every place in order, or click any point on the map."
+  end_title: "Explore on your own"
+  end_text: "Drag the map, zoom in, or click any point to revisit a place."
+  end_button: "Back to the first place"
+
+# Footer text. Markdown links work here.
+footer: "Center for Western Priorities · [westernpriorities.org](https://westernpriorities.org)"
