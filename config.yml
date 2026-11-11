@@ -32,6 +32,19 @@ hero:
   alt: "Cedar Mesa overlooking Valley of the Gods, Utah"
   credit: "Photo: Cedar Mesa overlooking Valley of the Gods, Utah. Bureau of Land Management"
 
+# Picture shown when someone shares the map's link on Facebook, LinkedIn,
+# Bluesky, X, or Slack. Needs site_url above to work. Choose one:
+#   map    A picture of the full map with the CWP and partner logos in the
+#          corner, made automatically every time the map is published (default)
+#   hero   The large photo at the top of the page
+#   Or the path to your own picture, like "images/share.jpg". Make it
+#   1200 by 630 pixels so it isn't cropped.
+# alt describes the picture for screen readers. Leave it blank to use a
+# default ("Map:" plus the story title, or the hero photo's alt text).
+share:
+  image: "map"
+  alt: ""
+
 map:
   # What the map shows when zoomed all the way out:
   #   us      The 50 states, with Alaska and Hawaii in insets (default)

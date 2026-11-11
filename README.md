@@ -23,6 +23,7 @@ A plain-language guide for colleagues who don't use GitHub lives in Google Docs:
 3. Go to the **Actions** tab. If a run named "Build and publish map" failed because Pages wasn't turned on yet, open it and click **Re-run all jobs**.
 4. When the run finishes, the map is live at `https://center-for-western-priorities.github.io/REPO-NAME/`. Put that address in `config.yml` as `site_url` so social media previews work.
 5. Replace the sample content in `content/story.md`, `content/sites.csv`, `config.yml`, and `images/`.
+6. Choose the link preview picture under `share` in `config.yml` (see below).
 
 ---
 
@@ -132,6 +133,18 @@ Every change saved to the `main` branch triggers the **Build and publish map** w
 - **Red X:** Nothing was published. The run's summary page lists each problem in plain language, such as which row has a bad coordinate or which heading doesn't match a place. Fix the file, upload it again, and the build reruns. Warnings (yellow) don't stop publishing but are worth reading.
 
 To rebuild without changing anything, open **Actions** > **Build and publish map** > **Run workflow**.
+
+## Link previews
+
+When someone shares the map's address on Facebook, LinkedIn, Bluesky, X, or Slack, the post shows a preview card with the story title, subtitle, and a picture. The `share` setting in `config.yml` picks the picture:
+
+- `map` (default): every publish makes `social-card.jpg`, a 1,200 by 630 pixel picture of the full map with the CWP logo, and the partner logo if there is one, small in the bottom right corner.
+- `hero`: the large photo at the top of the page.
+- A path to your own picture, like `images/share.jpg`. Make it 1,200 by 630 pixels so platforms don't crop it.
+
+Previews only work once `site_url` is filled in. The map picture is made with Chrome, which GitHub's build machines already have. If Chrome isn't available, the build warns and falls back to the top photo.
+
+Platforms cache previews. After changing the picture on a link that has already been shared, refresh it in Facebook's [Sharing Debugger](https://developers.facebook.com/tools/debug/) and LinkedIn's [Post Inspector](https://www.linkedin.com/post-inspector/).
 
 ## Embedding on westernpriorities.org
 

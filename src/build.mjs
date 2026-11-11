@@ -11,6 +11,7 @@ import { parse as parseCsv } from "csv-parse/sync";
 import { marked } from "marked";
 import { geoAlbersUsa, geoConicEqualArea, geoPath, geoContains, geoBounds, geoCentroid } from "d3-geo";
 import { feature } from "topojson-client";
+import { makeSocialCard, CARD_W, CARD_H } from "./social-card.mjs";
 
 const require = createRequire(import.meta.url);
 const SRC = path.dirname(new URL(import.meta.url).pathname);
@@ -325,13 +326,30 @@ if (hero.image && !heroImg) console.log(`Warning: hero image "${hero.image}" not
 const dekHtml = render(dekTokens).replace(/<p>/g, '<p class="dek">');
 const dekPlain = plain(dekTokens.map(t => t.text || "").join(" "));
 const siteUrl = cfg.site_url ? String(cfg.site_url).replace(/\/?$/, "/") : "";
-const meta = [
+// Link preview image: "map" (generated after the build), "hero", or a path.
+const share = cfg.share || {};
+const shareChoice = String(share.image ?? "map").trim();
+let shareImg = "", shareAlt = String(share.alt || "").trim(), shareSize = null;
+if (shareChoice === "map") { shareImg = "social-card.jpg"; shareSize = [CARD_W, CARD_H]; if (!shareAlt) shareAlt = `Map: ${plain(title)}`; }
+else if (shareChoice === "hero" || shareChoice === "") { shareImg = heroImg; if (!shareAlt) shareAlt = hero.alt || ""; }
+else if (exists(shareChoice)) { shareImg = shareChoice; }
+else { console.log(`Warning: share image "${shareChoice}" not found, so link previews use the top photo.`); shareImg = heroImg; if (!shareAlt) shareAlt = hero.alt || ""; }
+if (shareImg && !siteUrl) console.log("Warning: site_url is blank in config.yml, so link previews will have no picture.");
+const metaFor = img => [
   `<meta name="description" content="${esc(dekPlain)}">`,
   `<meta property="og:type" content="website">`, `<meta property="og:title" content="${esc(title)}">`, `<meta property="og:description" content="${esc(dekPlain)}">`,
   siteUrl ? `<meta property="og:url" content="${esc(siteUrl)}">` : "",
-  siteUrl && heroImg ? `<meta property="og:image" content="${esc(siteUrl + heroImg)}">` : "",
-  `<meta name="twitter:card" content="${heroImg ? "summary_large_image" : "summary"}">`,
+  `<meta property="og:site_name" content="Center for Western Priorities">`,
+  ...(siteUrl && img ? [
+    `<meta property="og:image" content="${esc(siteUrl + img)}">`,
+    ...(img === "social-card.jpg" ? [`<meta property="og:image:type" content="image/jpeg">`, `<meta property="og:image:width" content="${CARD_W}">`, `<meta property="og:image:height" content="${CARD_H}">`] : []),
+    shareAlt ? `<meta property="og:image:alt" content="${esc(shareAlt)}">` : "",
+    `<meta name="twitter:image" content="${esc(siteUrl + img)}">`,
+    shareAlt ? `<meta name="twitter:image:alt" content="${esc(shareAlt)}">` : "",
+  ] : []),
+  `<meta name="twitter:card" content="${siteUrl && img ? "summary_large_image" : "summary"}">`,
 ].filter(Boolean).join("\n");
+const meta = metaFor(shareImg);
 const filtersHtml = data.filters.length ? `<div class="filterband"><div class="wrap"><div class="filters" role="group" aria-label="Filter ${esc(labels.plural)}">${
   data.filters.map((f, i) => f.style === "dropdown"
     ? `<div class="fgroup"><label class="flabel" for="f${i}">${esc(f.label)}</label><select id="f${i}" data-f="${i}"><option value="">All</option>${f.values.map(v => `<option>${esc(v.v)}</option>`).join("")}</select></div>`
@@ -359,4 +377,14 @@ fs.writeFileSync(path.join(OUT, ".nojekyll"), "");
 const copy = rel => { const src = path.join(ROOT, rel); if (fs.existsSync(src)) fs.cpSync(src, path.join(OUT, rel), { recursive: true }); };
 copy("images");
 if (partner.logo && !partner.logo.toLowerCase().endsWith(".svg")) copy(partner.logo);
+if (shareImg && shareImg !== "social-card.jpg") copy(shareImg);
+if (shareChoice === "map") {
+  const made = await makeSocialCard(OUT);
+  if (made === true) console.log("Made social-card.jpg for link previews.");
+  else {
+    console.log(`Warning: couldn't make the map preview picture (${made}), so link previews use the top photo.`);
+    if (!share.alt) shareAlt = hero.alt || "";
+    fs.writeFileSync(path.join(OUT, "index.html"), html.replace(meta, () => metaFor(heroImg)));
+  }
+}
 console.log(`\nBuilt _site/index.html with ${out.length} ${out.length === 1 ? labels.singular : labels.plural}${warnings.length ? ` and ${warnings.length} warning(s)` : ""}.`);
