@@ -69,7 +69,9 @@ const filtersCfg = Array.isArray(cfg.filters) ? cfg.filters : [];
 const colorBy = ptsCfg.color_by || "";
 const colors = ptsCfg.colors || {};
 const defaultColor = isHex(ptsCfg.default_color) ? ptsCfg.default_color : "#d2781e";
-for (const [k, c] of Object.entries(colors)) if (!isHex(c)) err(CONFIG, `The color for "${k}" is "${c}". Colors need to be six-digit codes like "#c96d17".`);
+for (const [k, c] of Object.entries(colors)) if (!isHex(c)) err(CONFIG, c == null
+  ? `The color for "${k}" is missing. Color codes need quote marks around them, like "${k}": "#c96d17".`
+  : `The color for "${k}" is "${c}". Colors need to be six-digit codes in quote marks, like "#c96d17".`);
 if (ptsCfg.default_color && !isHex(ptsCfg.default_color)) err(CONFIG, `default_color "${ptsCfg.default_color}" needs to be a six-digit code like "#d2781e".`);
 
 // ---------- sites.csv ----------
@@ -95,7 +97,7 @@ rows.forEach((r, i) => {
   if (seenName.has(norm(name))) err(SITES, `${line}: the name "${name}" is used more than once.`);
   seenId.add(id); seenName.set(norm(name), id);
   const lat = Number(r.lat), lon = Number(r.lon);
-  if (!r.lat || !r.lon || Number.isNaN(lat) || Number.isNaN(lon)) err(SITES, `${line} (${name}): lat and lon need to be numbers, like 36.03 and -107.91.`);
+  if (!r.lat || !r.lon || Number.isNaN(lat) || Number.isNaN(lon)) err(SITES, `${line} (${name}): lat and lon need to be numbers in separate columns, like 36.03 and -107.91. Coordinates copied from Google Maps come as one pair, so split them at the comma.`);
   else if (Math.abs(lat) > 90 || Math.abs(lon) > 180) err(SITES, `${line} (${name}): ${lat}, ${lon} isn't a real coordinate. lat should be between -90 and 90, lon between -180 and 180.`);
   let photo = (r.photo || "").replace(/^images\//, "");
   if (photo) {

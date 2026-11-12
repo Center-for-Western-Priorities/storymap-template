@@ -18,6 +18,8 @@ A plain-language guide for colleagues who don't use GitHub lives in Google Docs:
 
 ## Start a new map
 
+Step-by-step instructions for anyone on the team, including settings and troubleshooting, are in **[Storymap template: start a new map](https://docs.google.com/document/d/1QIgTtDmayVgHx13AoiWYDDkZxu_GWHXvBJaLGaNxsZQ/edit)**. The short version:
+
 1. On this repo's GitHub page, click **Use this template** > **Create a new repository**. Choose the `Center-for-Western-Priorities` organization, name the repo (for example, `2027-Monuments-Map`), set it to **Public**, and click **Create repository**.
 2. In the new repo, go to **Settings** > **Pages**. Under **Build and deployment** > **Source**, choose **GitHub Actions**.
 3. Go to the **Actions** tab. If a run named "Build and publish map" failed because Pages wasn't turned on yet, open it and click **Re-run all jobs**.
