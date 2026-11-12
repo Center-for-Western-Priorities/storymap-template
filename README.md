@@ -12,7 +12,7 @@ Each project keeps its content in three plain files:
 
 When any of these files changes on GitHub, the site rebuilds and republishes itself within a few minutes. The build checks for common mistakes first. If it finds one, the live map stays as it was and GitHub emails the person who made the change.
 
-A plain-language guide for colleagues who don't use GitHub lives in Google Docs: **[Storymap template: how to edit and publish](https://docs.google.com/document/d/1YjJvV-bLdko6gpQwPysDrM0zu2UNbTnXUBn4-Xb6tgE/edit)**. Starter copies of `story.md` and the places sheet are in the same [Drive folder](https://drive.google.com/drive/folders/1DWupwR3jyJEgY_O-3ANdNsRk9Jr1iwGW).
+A plain-language guide for colleagues who don't use GitHub lives in Google Docs: **[Storymap template: how to edit and publish](https://docs.google.com/document/d/1YjJvV-bLdko6gpQwPysDrM0zu2UNbTnXUBn4-Xb6tgE/edit)**. Starter copies of `story.md` and the places sheet are in the same [Drive folder](https://drive.google.com/drive/folders/1jEg49r_RcqMMaOkn1FFAEqj0OlRVPfxi).
 
 ---
 
